@@ -22,7 +22,7 @@ $(TARGET): $(SOURCES) $(VERILOG_SOURCES)
 	$(VERILATOR) $(VERILATOR_FLAGS) $(SOURCES) $(VERILOG_SOURCES) --top-module riscv_top -o $(TARGET)
 	cp $(OBJ_DIR)/riscv_sim $(TARGET)
 
-run: $(TARGET)
+run: $(TARGET) test.hex
 	./$(TARGET)
 
 clean:
