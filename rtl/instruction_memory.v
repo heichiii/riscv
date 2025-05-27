@@ -9,6 +9,6 @@ module instruction_memory (
     assign instruction = memory[pc[9:2]]; // Word aligned
     
     initial begin
-        $readmemh("test.hex", memory); // Load instructions from hex file
+        $readmemh("test2.hex", memory); // Load instructions from hex file
     end
 endmodule
