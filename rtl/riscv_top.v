@@ -75,6 +75,7 @@ module riscv_top (
         .mem_write(mem_write),
         .branch(branch),
         .alu_op(alu_op),
+        .funct3(instruction[14:12]),
         .imm_src(imm_src)
     );
     

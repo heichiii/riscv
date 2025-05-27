@@ -1,5 +1,6 @@
 module control_unit (
     input [6:0] opcode,
+    input [2:0] funct3,
     output reg reg_write,
     output reg alu_src,
     output reg mem_to_reg,
@@ -58,8 +59,17 @@ module control_unit (
                 mem_read = 1'b0;
                 mem_write = 1'b0;
                 branch = 1'b0;
-                alu_op = 2'b00;
+                // alu_op = 2'b00;
                 imm_src = 2'b00;
+                case (funct3)
+                    3'b000: alu_op = 2'b00; // addi
+                    3'b010: alu_op = 2'b11; // slti
+                    // 3'b111: alu_op = 2'b01; // andi
+                    // 3'b110: alu_op = 2'b10; // ori
+                    // 3'b100: alu_op = 2'b01; // xori
+                    default: alu_op = 2'b11; // Default to addi behavior
+                endcase
+    
             end
             default: begin
                 reg_write = 1'b0;
