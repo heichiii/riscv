@@ -23,10 +23,10 @@ module data_memory (
             read_data = 32'd0;
         end
     end
-    
+    integer i;
     initial begin
         // Initialize memory
-        for (integer i = 0; i < 256; i = i + 1) begin
+        for (i = 0; i < 256; i = i + 1) begin
             memory[i] = 32'd0;
         end
     end

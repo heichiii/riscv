@@ -13,10 +13,10 @@ module register_file (
     
     assign read_data1 = (read_reg1 != 0) ? registers[read_reg1] : 32'd0;
     assign read_data2 = (read_reg2 != 0) ? registers[read_reg2] : 32'd0;
-    
+    integer i;
     always @(posedge clk or posedge reset) begin
         if (reset) begin
-            for (integer i = 0; i < 32; i = i + 1) begin
+            for (i = 0; i < 32; i = i + 1) begin
                 registers[i] <= 32'd0;
             end
         end else if (reg_write && write_reg != 0) begin

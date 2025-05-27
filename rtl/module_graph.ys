@@ -1,0 +1,23 @@
+# ========== 读取设计文件 ==========
+read_verilog -sv \
+    pc.v \
+    register_file.v \
+    alu.v \
+    sign_extend.v \
+    control_unit.v \
+    data_memory.v \
+    instruction_memory.v \
+    riscv_top.v
+
+# ========== 设置顶层模块 ==========
+hierarchy -check -top riscv_top
+
+# ========== 保留层次结构 ==========
+# 禁用优化以保留所有模块连接关系
+hierarchy -generate
+uniquify
+proc; opt
+
+# ========== 生成模块调用图 ==========
+show -format dot \
+    -prefix riscv_top_connections
