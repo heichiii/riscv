@@ -1,0 +1,202 @@
+<mxfile host="app.diagrams.net">
+    <diagram name="Page-1" id="0">
+        <mxGraphModel dx="1426" dy="798" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                
+                <!-- 流程图标题 -->
+                <mxCell id="title" value="RISC-V Single Cycle Processor Microprogram Flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="20" width="400" height="40" as="geometry"/>
+                </mxCell>
+                
+                <!-- Start -->
+                <mxCell id="start" value="Start" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="350" y="100" width="80" height="40" as="geometry"/>
+                </mxCell>
+                
+                <!-- Reset? -->
+                <mxCell id="reset_decision" value="Reset?" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="350" y="170" width="80" height="60" as="geometry"/>
+                </mxCell>
+                
+                <!-- Fetch Stage -->
+                <mxCell id="fetch" value="&lt;b&gt;FETCH STAGE&lt;/b&gt;&lt;div&gt;instruction = mem[PC]&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+                    <mxGeometry x="325" y="260" width="130" height="60" as="geometry"/>
+                </mxCell>
+                
+                <!-- Decode Stage -->
+                <mxCell id="decode" value="&lt;b&gt;DECODE STAGE&lt;/b&gt;&lt;div&gt;1. Generate controls&lt;br&gt;2. Read register file&lt;br&gt;3. Sign-extend imm&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+                    <mxGeometry x="325" y="350" width="130" height="90" as="geometry"/>
+                </mxCell>
+                
+                <!-- Execute Stage -->
+                <mxCell id="execute" value="&lt;b&gt;EXECUTE STAGE&lt;/b&gt;&lt;div&gt;1. ALU computes&lt;br&gt;2. Calculate branch target&lt;br&gt;3. Check branch condition&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+                    <mxGeometry x="325" y="470" width="130" height="90" as="geometry"/>
+                </mxCell>
+                
+                <!-- Memory Stage -->
+                <mxCell id="memory" value="&lt;b&gt;MEM ACCESS STAGE&lt;/b&gt;&lt;div&gt;if mem_read: load_data&lt;br&gt;if mem_write: store_data&lt;br&gt;else: no operation&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+                    <mxGeometry x="325" y="590" width="130" height="90" as="geometry"/>
+                </mxCell>
+                
+                <!-- Writeback Stage -->
+                <mxCell id="writeback" value="&lt;b&gt;WRITEBACK STAGE&lt;/b&gt;&lt;div&gt;if reg_write:&lt;br&gt;reg[rd] = MUX(ALU_result, load_data)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+                    <mxGeometry x="325" y="710" width="130" height="70" as="geometry"/>
+                </mxCell>
+                
+                <!-- PC Update Stage -->
+                <mxCell id="pc_update" value="&lt;b&gt;PC UPDATE STAGE&lt;/b&gt;&lt;div&gt;next_pc = MUX(PC+4, PC_branch)&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+                    <mxGeometry x="325" y="810" width="130" height="60" as="geometry"/>
+                </mxCell>
+                
+                <!-- Next Cycle -->
+                <mxCell id="next_cycle" value="Next Cycle" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="350" y="900" width="80" height="40" as="geometry"/>
+                </mxCell>
+                
+                <!-- 连接线 -->
+                
+                <!-- Start to Reset? -->
+                <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="start" target="reset_decision">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- Reset? Yes -->
+                <mxCell id="edge2" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="reset_decision" target="fetch">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="390" y="230" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                
+                <!-- Reset? No -->
+                <mxCell id="edge3" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;" edge="1" parent="1" source="reset_decision" target="fetch">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="430" y="200" as="sourcePoint"/>
+                        <mxPoint x="390" y="260" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                
+                <!-- Fetch to Decode -->
+                <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="fetch" target="decode">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- Decode to Execute -->
+                <mxCell id="edge5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="decode" target="execute">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- Execute to Memory -->
+                <mxCell id="edge6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="execute" target="memory">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- Memory to Writeback -->
+                <mxCell id="edge7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="memory" target="writeback">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- Writeback to PC Update -->
+                <mxCell id="edge8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="writeback" target="pc_update">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- PC Update to Next Cycle -->
+                <mxCell id="edge9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="pc_update" target="next_cycle">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                
+                <!-- Next Cycle to Fetch -->
+                <mxCell id="edge10" value="Clock Cycle" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="next_cycle" target="fetch">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="390" y="960"/>
+                            <mxPoint x="520" y="960"/>
+                            <mxPoint x="520" y="260"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                
+                <!-- 控制信号说明 -->
+                <mxCell id="legend_title" value="&lt;b&gt;Control Signals&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="100" width="120" height="30" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="legend_reg_write" value="reg_write: Register write enable" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="140" width="180" height="20" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="legend_alu_src" value="alu_src: ALU source select (0=reg, 1=imm)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="170" width="180" height="20" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="legend_mem_to_reg" value="mem_to_reg: WB source select (0=ALU, 1=mem)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="200" width="180" height="20" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="legend_mem_read" value="mem_read: Memory read enable" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="230" width="180" height="20" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="legend_mem_write" value="mem_write: Memory write enable" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="260" width="180" height="20" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="legend_branch" value="branch: Branch instruction flag" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="290" width="180" height="20" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="legend_alu_op" value="alu_op[1:0]: ALU operation control" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="320" width="180" height="20" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="legend_imm_src" value="imm_src[1:0]: Immediate format select" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="350" width="180" height="20" as="geometry"/>
+                </mxCell>
+                
+                <!-- 阶段说明 -->
+                <mxCell id="stage_legend" value="&lt;b&gt;Pipeline Stages&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;fontSize=14;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="400" width="120" height="30" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="stage_fetch" value="&lt;div style=&quot;background-color:#d5e8d4; padding:4px;&quot;&gt;Fetch&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="440" width="80" height="30" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="stage_decode" value="&lt;div style=&quot;background-color:#dae8fc; padding:4px;&quot;&gt;Decode&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="480" width="80" height="30" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="stage_execute" value="&lt;div style=&quot;background-color:#ffe6cc; padding:4px;&quot;&gt;Execute&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="520" width="80" height="30" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="stage_memory" value="&lt;div style=&quot;background-color:#e1d5e7; padding:4px;&quot;&gt;Memory&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="560" width="80" height="30" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="stage_writeback" value="&lt;div style=&quot;background-color:#fff2cc; padding:4px;&quot;&gt;Writeback&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="600" width="80" height="30" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="stage_pc_update" value="&lt;div style=&quot;background-color:#f8cecc; padding:4px;&quot;&gt;PC Update&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="640" width="80" height="30" as="geometry"/>
+                </mxCell>
+                
+                <!-- 关键点说明 -->
+                <mxCell id="note1" value="• All stages complete in one clock cycle" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="150" width="250" height="20" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="note2" value="• PC is updated at clock rising edge" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="180" width="250" height="20" as="geometry"/>
+                </mxCell>
+                
+                <mxCell id="note3" value="• Register writes happen at clock rising edge" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingTop=4;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="210" width="250" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

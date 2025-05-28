@@ -52,13 +52,11 @@ $timescale 1ps $end
    $scope module dmem $end
     $var wire 32 1 addr [31:0] $end
     $var wire  1 _ clk $end
+    $var wire 32 # i [31:0] $end
     $var wire  1 * mem_read $end
     $var wire  1 + mem_write $end
     $var wire 32 b read_data [31:0] $end
     $var wire 32 0 write_data [31:0] $end
-    $scope module unnamedblk1 $end
-     $var wire 32 # i [31:0] $end
-    $upscope $end
    $upscope $end
    $scope module imem $end
     $var wire 32 & instruction [31:0] $end
@@ -72,6 +70,7 @@ $timescale 1ps $end
    $upscope $end
    $scope module reg_file $end
     $var wire  1 _ clk $end
+    $var wire 32 ^ i [31:0] $end
     $var wire 32 / read_data1 [31:0] $end
     $var wire 32 0 read_data2 [31:0] $end
     $var wire  5 ; read_reg1 [4:0] $end
@@ -112,9 +111,6 @@ $timescale 1ps $end
     $var wire  1 ` reset $end
     $var wire 32 a write_data [31:0] $end
     $var wire  5 = write_reg [4:0] $end
-    $scope module unnamedblk1 $end
-     $var wire 32 ^ i [31:0] $end
-    $upscope $end
    $upscope $end
    $scope module sign_ext $end
     $var wire 32 4 imm_ext [31:0] $end
